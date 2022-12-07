@@ -1,5 +1,5 @@
 //
-//  TwoPlayerViewController.swift
+//  GameViewController.swift
 //  ThreeInARow
 //
 //  Created by Cilia Ence on 2022-12-07.
@@ -8,12 +8,30 @@
 
 import UIKit
 
-class TwoPlayerViewController: UIViewController {
-
+class GameViewController: UIViewController {
+    
+    var player1 : Player?
+    var player2 : Player?
+    var game : Game?
+    
+    @IBOutlet var player1Label: UILabel!
+    @IBOutlet var player2Label: UILabel!
+    @IBOutlet var turnLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let player1 = player1 {
+            player1Label.text = "\(player1.name): 0"
+            turnLabel.text = "\(player1.name) make your move!"
+            
+            if let player2 = player2 {
+                player2Label.text = "\(player2.name): 0"
+                
+                game = Game(player1: player1, player2: player2)
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

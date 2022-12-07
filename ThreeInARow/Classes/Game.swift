@@ -21,10 +21,10 @@ class Game {
         case player2
     }
     
-    init() {
+    init(player1: Player, player2: Player) {
         board = [[CellState]](repeating: [CellState](repeating: .empty, count: 3), count: 3)
-        player1 = Player(name: "Player 1", symbol: "X")
-        player2 = Player(name: "Player 2", symbol: "O")
+        self.player1 = player1
+        self.player2 = player2
     }
     
     func placeSymbol(symbol: String, atRow row: Int, column: Int) {

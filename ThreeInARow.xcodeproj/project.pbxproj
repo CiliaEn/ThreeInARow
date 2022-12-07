@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7430B5602940B3EF0035E130 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7430B55F2940B3EF0035E130 /* GameViewController.swift */; };
 		74DC6B1D29378AFF003795BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC6B1C29378AFF003795BC /* AppDelegate.swift */; };
 		74DC6B1F29378AFF003795BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC6B1E29378AFF003795BC /* ViewController.swift */; };
 		74DC6B2229378AFF003795BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DC6B2029378AFF003795BC /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7430B55F2940B3EF0035E130 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		74DC6B1929378AFF003795BC /* ThreeInARow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreeInARow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DC6B1C29378AFF003795BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74DC6B1E29378AFF003795BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7430B55D2940B0250035E130 /* Viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				74DC6B1E29378AFF003795BC /* ViewController.swift */,
+				74DC6BD62940A98E003795BC /* TwoPlayerViewController.swift */,
+				7430B55F2940B3EF0035E130 /* GameViewController.swift */,
+			);
+			path = Viewcontrollers;
+			sourceTree = "<group>";
+		};
+		7430B55E2940B0450035E130 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				74DC6BCC293F508C003795BC /* Player.swift */,
+				74DC6BD0293F51C5003795BC /* Game.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		74DC6B1029378AFF003795BC = {
 			isa = PBXGroup;
 			children = (
@@ -103,15 +124,13 @@
 		74DC6B1B29378AFF003795BC /* ThreeInARow */ = {
 			isa = PBXGroup;
 			children = (
+				7430B55E2940B0450035E130 /* Classes */,
+				7430B55D2940B0250035E130 /* Viewcontrollers */,
 				74DC6B1C29378AFF003795BC /* AppDelegate.swift */,
-				74DC6B1E29378AFF003795BC /* ViewController.swift */,
 				74DC6B2029378AFF003795BC /* Main.storyboard */,
 				74DC6B2329378AFF003795BC /* Assets.xcassets */,
 				74DC6B2529378AFF003795BC /* LaunchScreen.storyboard */,
 				74DC6B2829378B00003795BC /* Info.plist */,
-				74DC6BCC293F508C003795BC /* Player.swift */,
-				74DC6BD0293F51C5003795BC /* Game.swift */,
-				74DC6BD62940A98E003795BC /* TwoPlayerViewController.swift */,
 			);
 			path = ThreeInARow;
 			sourceTree = "<group>";
@@ -272,6 +291,7 @@
 				74DC6BCD293F508C003795BC /* Player.swift in Sources */,
 				74DC6BD1293F51C5003795BC /* Game.swift in Sources */,
 				74DC6B1F29378AFF003795BC /* ViewController.swift in Sources */,
+				7430B5602940B3EF0035E130 /* GameViewController.swift in Sources */,
 				74DC6B1D29378AFF003795BC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
