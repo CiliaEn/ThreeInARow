@@ -8,15 +8,27 @@
 
 import UIKit
 
+
 //A first comment 2022-11-30
 
 class ViewController: UIViewController {
+    
+    let twoPlayerSegueId = "twoPlayerSegue"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
     }
-
+    @IBAction func onePlayer(_ sender: UIButton) {
+    }
+    
+    @IBAction func twoPlayer(_ sender: UIButton) {
+        
+       performSegue(withIdentifier: twoPlayerSegueId, sender: self)
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
