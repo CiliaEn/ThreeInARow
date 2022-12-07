@@ -14,6 +14,9 @@
 		74DC6B2729378B00003795BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DC6B2529378AFF003795BC /* LaunchScreen.storyboard */; };
 		74DC6B3229378B00003795BC /* ThreeInARowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC6B3129378B00003795BC /* ThreeInARowTests.swift */; };
 		74DC6B3D29378B00003795BC /* ThreeInARowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC6B3C29378B00003795BC /* ThreeInARowUITests.swift */; };
+		74DC6BCD293F508C003795BC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC6BCC293F508C003795BC /* Player.swift */; };
+		74DC6BD1293F51C5003795BC /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC6BD0293F51C5003795BC /* Game.swift */; };
+		74DC6BD72940A98E003795BC /* TwoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC6BD62940A98E003795BC /* TwoPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		74DC6B3829378B00003795BC /* ThreeInARowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreeInARowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DC6B3C29378B00003795BC /* ThreeInARowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeInARowUITests.swift; sourceTree = "<group>"; };
 		74DC6B3E29378B00003795BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74DC6BCC293F508C003795BC /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		74DC6BD0293F51C5003795BC /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		74DC6BD62940A98E003795BC /* TwoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,9 @@
 				74DC6B2329378AFF003795BC /* Assets.xcassets */,
 				74DC6B2529378AFF003795BC /* LaunchScreen.storyboard */,
 				74DC6B2829378B00003795BC /* Info.plist */,
+				74DC6BCC293F508C003795BC /* Player.swift */,
+				74DC6BD0293F51C5003795BC /* Game.swift */,
+				74DC6BD62940A98E003795BC /* TwoPlayerViewController.swift */,
 			);
 			path = ThreeInARow;
 			sourceTree = "<group>";
@@ -259,6 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74DC6BD72940A98E003795BC /* TwoPlayerViewController.swift in Sources */,
+				74DC6BCD293F508C003795BC /* Player.swift in Sources */,
+				74DC6BD1293F51C5003795BC /* Game.swift in Sources */,
 				74DC6B1F29378AFF003795BC /* ViewController.swift in Sources */,
 				74DC6B1D29378AFF003795BC /* AppDelegate.swift in Sources */,
 			);
