@@ -62,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="-73" y="124"/>
         </scene>
-        <!--View Controller-->
+        <!--Two Player View Controller-->
         <scene sceneID="h3o-Ge-DNk">
             <objects>
-                <viewController id="2Bb-Mr-Lza" sceneMemberID="viewController">
+                <viewController id="2Bb-Mr-Lza" customClass="TwoPlayerViewController" customModule="ThreeInARow" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qJ8-TL-D8M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,7 +93,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Start playing"/>
                                 <connections>
-                                    <segue destination="P55-sL-6DN" kind="show" id="K6B-St-kmg"/>
+                                    <action selector="newGame:" destination="2Bb-Mr-Lza" eventType="touchUpInside" id="h9K-RJ-I7c"/>
+                                    <segue destination="P55-sL-6DN" kind="show" identifier="newGameSegue" id="K6B-St-kmg"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cgp-k7-kHd">
@@ -118,15 +119,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0FW-rZ-cmw"/>
                     </view>
+                    <connections>
+                        <outlet property="player1TextField" destination="Phk-W8-LJr" id="Tbw-mg-8iI"/>
+                        <outlet property="player2TextField" destination="cgp-k7-kHd" id="e3v-iB-tjJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rZ-Id-kcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="834" y="-82"/>
         </scene>
-        <!--View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="pDI-1d-jH5">
             <objects>
-                <viewController id="P55-sL-6DN" sceneMemberID="viewController">
+                <viewController id="P55-sL-6DN" customClass="GameViewController" customModule="ThreeInARow" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xjr-3H-0DS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,8 +142,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player 1: 0         Player 2: 0" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKh-Hr-7FK">
-                                <rect key="frame" x="16" y="60" width="113" height="61"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1: 0" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKh-Hr-7FK">
+                                <rect key="frame" x="16" y="60" width="90" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -197,6 +202,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                 <state key="normal" title="X"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2: 0" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLd-Gy-Ddk">
+                                <rect key="frame" x="16" y="92" width="92.333333333333329" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -205,6 +216,8 @@
                             <constraint firstItem="lRU-r4-nDC" firstAttribute="top" secondItem="61n-9Y-fuU" secondAttribute="bottom" constant="8" id="3XK-cp-OEY"/>
                             <constraint firstItem="8TC-Nz-4g8" firstAttribute="centerX" secondItem="xjr-3H-0DS" secondAttribute="centerX" id="8ni-f5-wTA"/>
                             <constraint firstItem="tCD-Gm-7cB" firstAttribute="centerY" secondItem="xjr-3H-0DS" secondAttribute="centerY" id="9cb-h9-qDK"/>
+                            <constraint firstItem="eLd-Gy-Ddk" firstAttribute="top" secondItem="yKh-Hr-7FK" secondAttribute="bottom" constant="8" id="Cue-n1-Sc4"/>
+                            <constraint firstItem="eLd-Gy-Ddk" firstAttribute="leading" secondItem="Xl4-h3-B31" secondAttribute="leading" constant="16" id="Ded-Eb-ROB"/>
                             <constraint firstItem="61n-9Y-fuU" firstAttribute="centerX" secondItem="xjr-3H-0DS" secondAttribute="centerX" id="HfI-NF-6Xx"/>
                             <constraint firstItem="yKh-Hr-7FK" firstAttribute="top" secondItem="Xl4-h3-B31" secondAttribute="top" constant="16" id="I35-Wx-CbA"/>
                             <constraint firstItem="tCD-Gm-7cB" firstAttribute="top" secondItem="XjJ-eW-fTX" secondAttribute="bottom" constant="8" id="Lrf-PL-4X2"/>
@@ -228,10 +241,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xl4-h3-B31"/>
                     </view>
+                    <connections>
+                        <outlet property="player1Label" destination="yKh-Hr-7FK" id="jY5-wq-cg5"/>
+                        <outlet property="player2Label" destination="eLd-Gy-Ddk" id="JuR-n9-ZMM"/>
+                        <outlet property="turnLabel" destination="V5q-6g-q9I" id="xIa-sQ-uof"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnD-bs-MYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1830" y="123"/>
+            <point key="canvasLocation" x="1829.5999999999999" y="122.66009852216749"/>
         </scene>
     </scenes>
 </document>
