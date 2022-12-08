@@ -10,25 +10,41 @@ import Foundation
 
 class Game {
     
-    var player1: Player
-    var player2: Player
+//    var player1: Player
+//    var player2: Player
+    var CIRCLE = "O"
+    var CROSS = "X"
     
-    let board : [[Game.CellState]]
-    
-    enum CellState {
-        case empty
+    enum Turn {
         case player1
         case player2
     }
     
-    init(player1: Player, player2: Player) {
-        board = [[CellState]](repeating: [CellState](repeating: .empty, count: 3), count: 3)
-        self.player1 = player1
-        self.player2 = player2
+    
+//    init(player1: Player, player2: Player) {
+//        self.player1 = player1
+//        self.player2 = player2
+//    }
+    
+    func randomizeFirstTurn() -> Turn {
+
+        if (arc4random_uniform(2) + 1 == 1) {
+            return Turn.player1
+        }
+        return Turn.player2
+
     }
     
-    func placeSymbol(symbol: String, atRow row: Int, column: Int) {
-    }
+//    func placeSymbol(_ sender: UIButton) {
+//
+//        if(sender.title == ""){
+//
+//            if (currentTurn == Turn.player1){
+//                sender.setTitle(CIRCLE)
+//                currentTurn
+//            }
+//        }
+//    }
     
    /* func isGameOver() -> Bool {
         // Check if the game is over
