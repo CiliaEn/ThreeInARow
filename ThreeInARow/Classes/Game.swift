@@ -28,7 +28,6 @@ class Game {
     }
     
     func placeSymbol(symbol: String, atRow row: Int, column: Int) {
-        // Place the symbol on the board
     }
     
    /* func isGameOver() -> Bool {
