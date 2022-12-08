@@ -12,11 +12,32 @@ class GameViewController: UIViewController {
     
     var player1 : Player?
     var player2 : Player?
-    var game : Game?
+    let game = Game()
+    let firstTurn = Turn.player1
+    var currentTurn = Turn.player1
+    
+    let CIRCLE = "O"
+    let CROSS = "X"
+    
+    enum Turn {
+        case player1
+        case player2
+    }
     
     @IBOutlet var player1Label: UILabel!
     @IBOutlet var player2Label: UILabel!
     @IBOutlet var turnLabel: UILabel!
+    
+    @IBOutlet var a1: UIButton!
+    @IBOutlet var a2: UIButton!
+    @IBOutlet var a3: UIButton!
+    @IBOutlet var b1: UIButton!
+    @IBOutlet var b2: UIButton!
+    @IBOutlet var b3: UIButton!
+    @IBOutlet var c1: UIButton!
+    @IBOutlet var c2: UIButton!
+    @IBOutlet var c3: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +48,33 @@ class GameViewController: UIViewController {
             
             if let player2 = player2 {
                 player2Label.text = "\(player2.name): 0"
-                
-                game = Game(player1: player1, player2: player2)
             }
         }
+       // currentTurn = game.randomizeFirstTurn()
         
     }
-
+    
+    
+    @IBAction func boardButtonTapped(_ sender: UIButton) {
+        placeSymbol(sender)
+    }
+    
+    func placeSymbol(_ sender: UIButton){
+        
+        if(sender.title(for: .normal) == nil){
+            
+            if (currentTurn == Turn.player1){
+                sender.setTitle(CIRCLE, for: .normal)
+                currentTurn = Turn.player2
+                turnLabel.text = "\(player2!.name) make your move!"
+            } else if (currentTurn == Turn.player2){
+                sender.setTitle(CROSS, for: .normal)
+                currentTurn = Turn.player1
+                turnLabel.text = "\(player1!.name) make your move!"
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
