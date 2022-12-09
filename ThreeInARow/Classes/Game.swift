@@ -15,6 +15,8 @@ class Game {
                    ["", "", ""]
     ]
     
+    var isOver = false
+    
     func placeToken(_ token : String, _ xy : Int) {
 
         let x = xy / 10
@@ -28,6 +30,7 @@ class Game {
         for row in board {
             for space in row {
                 if (space.isEmpty){
+                    isOver = true
                     return false
                 }
             }
@@ -42,6 +45,7 @@ class Game {
         for i in 0..<3 {
             
             if (space(0, i, contains: s) && space(1, i, contains: s) && space(2, i, contains: s)){
+                isOver = true
                 return true
             }
         }
@@ -49,14 +53,17 @@ class Game {
         for i in 0..<3 {
             
             if (space(i, 0, contains: s) && space(i, 1, contains: s) && space(i, 2, contains: s)){
+                isOver = true
                 return true
             }
         }
         //Checks if someone has won diagonally
         if (space(0, 0, contains: s) && space(1, 1, contains: s) && space(2, 2, contains: s)){
+            isOver = true
             return true
         }
         if (space(0, 2, contains: s) && space(1, 1, contains: s) && space(2, 0, contains: s)){
+            isOver = true
             return true
         }
         return false

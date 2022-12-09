@@ -16,7 +16,7 @@ class GameViewController: UIViewController {
     var p2Name = "Player 2"
     var p1Score : Int = 0
     var p2Score : Int = 0
-    let game = Game()
+    var game = Game()
     let firstTurn = Turn.p1
     var currentTurn = Turn.p1
     
@@ -85,6 +85,21 @@ class GameViewController: UIViewController {
         listOfButtons.append(c2)
         listOfButtons.append(c3)
     }
+    @IBAction func labelTapped(_ sender: UITapGestureRecognizer) {
+        
+            if(game.isOver){
+                resetBoard()
+            }
+    }
+    
+    func resetBoard(){
+        for button in listOfButtons {
+            button.setTitle(nil, for: .normal)
+            button.isEnabled = true
+        }
+        game = Game()
+    }
+    
     
     @IBAction func boardButtonTapped(_ sender: UIButton) {
         
@@ -92,16 +107,19 @@ class GameViewController: UIViewController {
         
         //check if someone has won
         if (game.checkForWin(CIRCLE)){
-            turnLabel.text = "\(p1Name) won! \nPress to play again"
+            disableBoard()
+            turnLabel.text = "\(p1Name) won! Press to play again!"
             p1Score += 1
-            //start a new game
+            player1Label.text = "\(p1Name): \(p1Score)"
         } else if (game.checkForWin(CROSS)){
-            turnLabel.text = "\(p2Name) won! \nPress to play again"
+            disableBoard()
+            turnLabel.text = "\(p2Name) won! Press to play again!"
             p2Score += 1
-            //start a new game
-        } else if(game.boardIsFull()){
-            turnLabel.text = "It's a tie! \nPress to play again"
-            //start a new game
+            player2Label.text = "\(p2Name): \(p2Score)"
+        }
+        //Check if its a tie
+        else if(game.boardIsFull()){
+            turnLabel.text = "It's a tie! Press to play again!"
         }
     }
     
@@ -112,7 +130,6 @@ class GameViewController: UIViewController {
             
             if (currentTurn == Turn.p1){
                 sender.setTitle(CIRCLE, for: .normal)
-                
                 game.placeToken(CIRCLE, sender.tag)
                 currentTurn = Turn.p2
                 turnLabel.text = "\(p2Name) make your move!"
@@ -125,20 +142,14 @@ class GameViewController: UIViewController {
         }
     }
     
+    func disableBoard(){
+        for button in listOfButtons {
+            button.isEnabled = false
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
