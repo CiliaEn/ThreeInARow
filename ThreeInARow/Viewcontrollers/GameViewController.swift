@@ -19,6 +19,7 @@ class GameViewController: UIViewController {
     var game = Game()
     let firstTurn = Turn.p1
     var currentTurn = Turn.p1
+    var onePlayerMode : Bool?
     
     let CIRCLE = "O"
     let CROSS = "X"
@@ -46,9 +47,14 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let oneplayer = onePlayerMode {
+            print("\(oneplayer)")
+        }
 
         if let player1 = p1 {
             p1Name = player1.name
+            print("\(p1Name)")
             player1Label.text = "\(p1Name): 0"
             turnLabel.text = "\(p1Name) make your move!"
             
@@ -85,20 +91,7 @@ class GameViewController: UIViewController {
         listOfButtons.append(c2)
         listOfButtons.append(c3)
     }
-    @IBAction func labelTapped(_ sender: UITapGestureRecognizer) {
-        
-            if(game.isOver){
-                resetBoard()
-            }
-    }
     
-    func resetBoard(){
-        for button in listOfButtons {
-            button.setTitle(nil, for: .normal)
-            button.isEnabled = true
-        }
-        game = Game()
-    }
     
     
     @IBAction func boardButtonTapped(_ sender: UIButton) {
@@ -133,13 +126,55 @@ class GameViewController: UIViewController {
                 game.placeToken(CIRCLE, sender.tag)
                 currentTurn = Turn.p2
                 turnLabel.text = "\(p2Name) make your move!"
+                
+                if let onePlayer = onePlayerMode {
+                    
+                    if(onePlayer){
+                        //make move for the computer
+                        //can be changed to a random
+                        
+                        var done = false
+                        
+                        for button in listOfButtons {
+                            
+                            if (done == false){
+                            if(button.title(for: .normal) == nil){
+                                button.setTitle(CROSS, for: .normal)
+                                game.placeToken(CROSS, button.tag)
+                                currentTurn = Turn.p1
+                                turnLabel.text = "\(p1Name) make your move!"
+                                done = true
+                            }
+                            }
+                        }
+                    }
+                    
+                }
+                
             } else if (currentTurn == Turn.p2){
-                sender.setTitle(CROSS, for: .normal)
-                game.placeToken(CROSS, sender.tag)
+                    sender.setTitle(CROSS, for: .normal)
+                    game.placeToken(CROSS, sender.tag)
                 currentTurn = Turn.p1
                 turnLabel.text = "\(p1Name) make your move!"
-            }
+                }
+            
+            
         }
+    }
+    
+    @IBAction func labelTapped(_ sender: UITapGestureRecognizer) {
+        
+        if(game.isOver){
+            resetBoard()
+        }
+    }
+    
+    func resetBoard(){
+        for button in listOfButtons {
+            button.setTitle(nil, for: .normal)
+            button.isEnabled = true
+        }
+        game = Game()
     }
     
     func disableBoard(){
@@ -152,4 +187,10 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 }
+
+
+
+
+

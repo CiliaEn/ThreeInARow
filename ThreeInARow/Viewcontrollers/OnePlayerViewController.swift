@@ -1,51 +1,52 @@
 //
-//  TwoPlayerViewController.swift
+//  OnePlayerViewController.swift
 //  ThreeInARow
 //
-//  Created by Cilia Ence on 2022-12-07.
+//  Created by Cilia Ence on 2022-12-09.
 //  Copyright © 2022 Cilia Ence. All rights reserved.
 //
 
 import UIKit
 
-class TwoPlayerViewController: UIViewController {
+class OnePlayerViewController: UIViewController {
     
-    let twoPlayerGameSegueId = "twoPlayerGameSegue"
-
+    
     @IBOutlet var player1TextField: UITextField!
-    @IBOutlet var player2TextField: UITextField!
-    
     var player1 : Player?
     var player2 : Player?
+    
+    let newGameSegueId = "onePlayerGameSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
+    
+    
+    @IBAction func startPlayingTapped(_ sender: UIButton) {
+        
+        if let player1Name = player1TextField.text {
+            print("\(player1Name)")
+            player1 = Player(name: player1Name, token: "O", score: 0)
+        }
+        player2 = Player(name: "Computer", token: "X", score: 0)
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func newGame(_ sender: UIButton) {
-        if let player1Name = player1TextField.text {
-            player1 = Player(name: player1Name, token: "O", score: 0)
-        }
-        if let player2Name = player2TextField.text {
-            player2 = Player(name: player2Name, token: "X", score: 0)
-        }
-        
-    }
-    
-   
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == twoPlayerGameSegueId {
+        if segue.identifier == newGameSegueId {
             if let destinationVC = segue.destination as? GameViewController  {
                 destinationVC.p1 = player1
                 destinationVC.p2 = player2
+                destinationVC.onePlayerMode = true
             }
         }
     }

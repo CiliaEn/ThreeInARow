@@ -13,6 +13,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let onePlayerSegueId = "onePlayerSegue"
     let twoPlayerSegueId = "twoPlayerSegue"
 
     override func viewDidLoad() {
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
         
     }
     @IBAction func onePlayer(_ sender: UIButton) {
+        performSegue(withIdentifier: onePlayerSegueId, sender: self)
     }
     
     @IBAction func twoPlayer(_ sender: UIButton) {
@@ -28,6 +30,8 @@ class ViewController: UIViewController {
        performSegue(withIdentifier: twoPlayerSegueId, sender: self)
         
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
