@@ -9,47 +9,66 @@
 import Foundation
 
 class Game {
+ 
+    var board = [  ["", "", ""],
+                   ["", "", ""],
+                   ["", "", ""]
+    ]
     
-//    var player1: Player
-//    var player2: Player
-    var CIRCLE = "O"
-    var CROSS = "X"
-    
-    enum Turn {
-        case player1
-        case player2
-    }
-    
-    
-//    init(player1: Player, player2: Player) {
-//        self.player1 = player1
-//        self.player2 = player2
-//    }
-    
-    func randomizeFirstTurn() -> Turn {
+    func placeToken(_ token : String, _ xy : Int) {
 
-        if (arc4random_uniform(2) + 1 == 1) {
-            return Turn.player1
+        let x = xy / 10
+        let y = xy - (x * 10)
+        print("\(x)\(y)")
+        board[x][y] = token
+        
+    }
+    func boardIsFull() -> Bool {
+        
+        for row in board {
+            for space in row {
+                if (space.isEmpty){
+                    return false
+                }
+            }
         }
-        return Turn.player2
-
+        //returns true if there are still free spaces
+        return true
     }
     
-//    func placeSymbol(_ sender: UIButton) {
-//
-//        if(sender.title == ""){
-//
-//            if (currentTurn == Turn.player1){
-//                sender.setTitle(CIRCLE)
-//                currentTurn
-//            }
-//        }
-//    }
-    
-   /* func isGameOver() -> Bool {
-        // Check if the game is over
+    func checkForWin(_ s: String) -> Bool {
+        
+        //Checks if someone has won horizontally
+        for i in 0..<3 {
+            
+            if (space(0, i, contains: s) && space(1, i, contains: s) && space(2, i, contains: s)){
+                return true
+            }
+        }
+        //Checks if someone has won vertically
+        for i in 0..<3 {
+            
+            if (space(i, 0, contains: s) && space(i, 1, contains: s) && space(i, 2, contains: s)){
+                return true
+            }
+        }
+        //Checks if someone has won diagonally
+        if (space(0, 0, contains: s) && space(1, 1, contains: s) && space(2, 2, contains: s)){
+            return true
+        }
+        if (space(0, 2, contains: s) && space(1, 1, contains: s) && space(2, 0, contains: s)){
+            return true
+        }
+        return false
     }
- */
+    
+    func space(_ x: Int, _ y : Int, contains token: String) -> Bool {
+        
+        if(board[x][y] == token){
+            return true
+        }
+        return false
+    }
 }
 
 
