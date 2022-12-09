@@ -10,18 +10,23 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    var player1 : Player?
-    var player2 : Player?
+    var p1 : Player?
+    var p2 : Player?
+    var p1Name = "Player 1"
+    var p2Name = "Player 2"
+    var p1Score : Int = 0
+    var p2Score : Int = 0
     let game = Game()
-    let firstTurn = Turn.player1
-    var currentTurn = Turn.player1
+    let firstTurn = Turn.p1
+    var currentTurn = Turn.p1
     
     let CIRCLE = "O"
     let CROSS = "X"
+    var listOfButtons = [UIButton]()
     
     enum Turn {
-        case player1
-        case player2
+        case p1
+        case p2
     }
     
     @IBOutlet var player1Label: UILabel!
@@ -42,35 +47,80 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let player1 = player1 {
-            player1Label.text = "\(player1.name): 0"
-            turnLabel.text = "\(player1.name) make your move!"
+        if let player1 = p1 {
+            p1Name = player1.name
+            player1Label.text = "\(p1Name): 0"
+            turnLabel.text = "\(p1Name) make your move!"
             
-            if let player2 = player2 {
-                player2Label.text = "\(player2.name): 0"
+            if let player2 = p2 {
+                p2Name = player2.name
+                player2Label.text = "\(p2Name): 0"
             }
         }
-       // currentTurn = game.randomizeFirstTurn()
+        setTagsForButtons()
+        setListOfButtons()
         
     }
     
+    func setTagsForButtons() {
+        a1.tag = 00
+        a2.tag = 01
+        a3.tag = 02
+        b1.tag = 10
+        b2.tag = 11
+        b3.tag = 12
+        c1.tag = 20
+        c2.tag = 21
+        c3.tag = 22
+    }
+    
+    func setListOfButtons() {
+        listOfButtons.append(a1)
+        listOfButtons.append(a2)
+        listOfButtons.append(a3)
+        listOfButtons.append(b1)
+        listOfButtons.append(b2)
+        listOfButtons.append(b3)
+        listOfButtons.append(c1)
+        listOfButtons.append(c2)
+        listOfButtons.append(c3)
+    }
     
     @IBAction func boardButtonTapped(_ sender: UIButton) {
-        placeSymbol(sender)
+        
+        placeToken(sender)
+        
+        //check if someone has won
+        if (game.checkForWin(CIRCLE)){
+            turnLabel.text = "\(p1Name) won! \nPress to play again"
+            p1Score += 1
+            //start a new game
+        } else if (game.checkForWin(CROSS)){
+            turnLabel.text = "\(p2Name) won! \nPress to play again"
+            p2Score += 1
+            //start a new game
+        } else if(game.boardIsFull()){
+            turnLabel.text = "It's a tie! \nPress to play again"
+            //start a new game
+        }
     }
     
-    func placeSymbol(_ sender: UIButton){
+    func placeToken(_ sender: UIButton){
         
+        //checks if place is empty
         if(sender.title(for: .normal) == nil){
             
-            if (currentTurn == Turn.player1){
+            if (currentTurn == Turn.p1){
                 sender.setTitle(CIRCLE, for: .normal)
-                currentTurn = Turn.player2
-                turnLabel.text = "\(player2!.name) make your move!"
-            } else if (currentTurn == Turn.player2){
+                
+                game.placeToken(CIRCLE, sender.tag)
+                currentTurn = Turn.p2
+                turnLabel.text = "\(p2Name) make your move!"
+            } else if (currentTurn == Turn.p2){
                 sender.setTitle(CROSS, for: .normal)
-                currentTurn = Turn.player1
-                turnLabel.text = "\(player1!.name) make your move!"
+                game.placeToken(CROSS, sender.tag)
+                currentTurn = Turn.p1
+                turnLabel.text = "\(p1Name) make your move!"
             }
         }
     }

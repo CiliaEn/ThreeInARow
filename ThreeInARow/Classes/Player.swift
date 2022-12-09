@@ -11,11 +11,13 @@ import Foundation
 class Player {
     
     let name: String
-    let symbol: String
+    let token: String
+    var score: Int
     
-    init(name: String, symbol: String) {
+    init(name: String, token: String, score: Int) {
         self.name = name
-        self.symbol = symbol
+        self.token = token
+        self.score = score
     }
 }
 
