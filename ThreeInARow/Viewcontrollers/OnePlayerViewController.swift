@@ -10,12 +10,12 @@ import UIKit
 
 class OnePlayerViewController: UIViewController {
     
+    let newGameSegueId = "onePlayerGameSegue"
     
     @IBOutlet var player1TextField: UITextField!
+    
     var player1 : Player?
     var player2 : Player?
-    
-    let newGameSegueId = "onePlayerGameSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +27,13 @@ class OnePlayerViewController: UIViewController {
     @IBAction func startPlayingTapped(_ sender: UIButton) {
         
         if let player1Name = player1TextField.text {
-            print("\(player1Name)")
+            print("1")
             player1 = Player(name: player1Name, token: "O", score: 0)
         }
+        print("1.5")
         player2 = Player(name: "Computer", token: "X", score: 0)
+        
+        performSegue(withIdentifier: newGameSegueId, sender: self)
         
     }
     
@@ -44,7 +47,9 @@ class OnePlayerViewController: UIViewController {
         
         if segue.identifier == newGameSegueId {
             if let destinationVC = segue.destination as? GameViewController  {
+                
                 destinationVC.p1 = player1
+                print("2")
                 destinationVC.p2 = player2
                 destinationVC.onePlayerMode = true
             }

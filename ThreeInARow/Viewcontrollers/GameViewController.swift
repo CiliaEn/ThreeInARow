@@ -49,22 +49,25 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let oneplayer = onePlayerMode {
-            print("\(oneplayer)")
+            print("3")
         }
 
         if let player1 = p1 {
             p1Name = player1.name
-            print("\(p1Name)")
+            print("4")
             player1Label.text = "\(p1Name): 0"
             turnLabel.text = "\(p1Name) make your move!"
+        }
             
             if let player2 = p2 {
+                print("5")
                 p2Name = player2.name
                 player2Label.text = "\(p2Name): 0"
             }
-        }
+        
         setTagsForButtons()
         setListOfButtons()
+        turnLabel.isUserInteractionEnabled = false
         
     }
     
@@ -113,6 +116,7 @@ class GameViewController: UIViewController {
         //Check if its a tie
         else if(game.boardIsFull()){
             turnLabel.text = "It's a tie! Press to play again!"
+            turnLabel.isUserInteractionEnabled = true
         }
     }
     
@@ -166,6 +170,7 @@ class GameViewController: UIViewController {
         
         if(game.isOver){
             resetBoard()
+            turnLabel.isUserInteractionEnabled = false
         }
     }
     
@@ -181,6 +186,8 @@ class GameViewController: UIViewController {
         for button in listOfButtons {
             button.isEnabled = false
         }
+        game.isOver = true
+        turnLabel.isUserInteractionEnabled = true
     }
 
     override func didReceiveMemoryWarning() {

@@ -155,9 +155,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Start playing"/>
                                 <connections>
-                                    <action selector="newGame:" destination="2Bb-Mr-Lza" eventType="touchUpInside" id="YMy-tG-fR1"/>
                                     <action selector="startPlayingTapped:" destination="lzy-KC-lG6" eventType="touchUpInside" id="HG2-Uc-L5j"/>
-                                    <segue destination="P55-sL-6DN" kind="show" identifier="onePlayerGameSegue" id="3Ud-Jw-dpY"/>
+                                    <segue destination="P55-sL-6DN" kind="show" identifier="onePlayerGameSegue" id="PAo-PO-tGJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -389,6 +388,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3Ud-Jw-dpY"/>
+        <segue reference="K6B-St-kmg"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -32,6 +32,7 @@ class TwoPlayerViewController: UIViewController {
     @IBAction func newGame(_ sender: UIButton) {
         if let player1Name = player1TextField.text {
             player1 = Player(name: player1Name, token: "O", score: 0)
+            print("1")
         }
         if let player2Name = player2TextField.text {
             player2 = Player(name: player2Name, token: "X", score: 0)
@@ -44,6 +45,7 @@ class TwoPlayerViewController: UIViewController {
         
         if segue.identifier == twoPlayerGameSegueId {
             if let destinationVC = segue.destination as? GameViewController  {
+                print("2")
                 destinationVC.p1 = player1
                 destinationVC.p2 = player2
             }
