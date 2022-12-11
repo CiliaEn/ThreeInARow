@@ -33,8 +33,6 @@ class OnePlayerViewController: UIViewController {
         print("1.5")
         player2 = Player(name: "Computer", token: "X", score: 0)
         
-        performSegue(withIdentifier: newGameSegueId, sender: self)
-        
     }
     
     override func didReceiveMemoryWarning() {
