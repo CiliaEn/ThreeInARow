@@ -76,6 +76,54 @@ class Game {
         }
         return false
     }
+    
+    func spaceToBlock(_ s: String) -> Int {
+        
+        //Checks if someone has 2 horizontally
+        for i in 0..<3 {
+            
+            if (space(1, i, contains: s) && space(2, i, contains: s)){
+                return 0 + i
+            }
+            if (space(0, i, contains: s) && space(2, i, contains: s)){
+                return 10 + i
+            }
+            if (space(0, i, contains: s) && space(1, i, contains: s)){
+                return 20 + i
+            }
+        }
+        //Checks if someone has 2 vertically
+        for i in 0..<3 {
+            
+            if (space(i, 1, contains: s) && space(i, 2, contains: s)){
+                return i * 10
+            }
+            if (space(i, 0, contains: s) && space(i, 2, contains: s)){
+                return i * 10 + 1
+            }
+            if (space(i, 0, contains: s) && space(i, 1, contains: s)){
+                return i * 10 + 2
+                }
+        }
+        //Checks if someone has 2 diagonally
+        if (space(0, 0, contains: s) && space(1, 1, contains: s)){
+            return 22
+            }
+        if (space(2, 2, contains: s) && space(0, 0, contains: s))
+        || (space(0, 2, contains: s) && space(2, 0, contains: s)){
+            return 11
+        }
+        if (space(1, 1, contains: s) && space(2, 2, contains: s)) {
+            return 0
+        }
+        if (space(0, 2, contains: s) && space(1, 1, contains: s)){
+            return 20
+        }
+        if (space(2, 0, contains: s) && space(1, 1, contains: s)){
+            return 2
+        }
+        return -1
+    }
 }
 
 

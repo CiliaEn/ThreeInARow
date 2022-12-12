@@ -59,9 +59,9 @@ class GameViewController: UIViewController {
     }
     
     func setTagsForButtons() {
-        a1.tag = 00
-        a2.tag = 01
-        a3.tag = 02
+        a1.tag = 0
+        a2.tag = 1
+        a3.tag = 2
         b1.tag = 10
         b2.tag = 11
         b3.tag = 12
@@ -153,21 +153,35 @@ class GameViewController: UIViewController {
     //make move for the computer
     func makeMove(){
         
+        //make new list of all the free spaces
         var freeSpaces = [UIButton]()
         
         for button in listOfButtons {
+            
             if(button.title(for: .normal) == nil){
                 freeSpaces.append(button)
             }
         }
-        let randomIndex = Int(arc4random_uniform(UInt32(freeSpaces.count)))
-        let randomButton = freeSpaces[randomIndex]
+        //prevent p1 from winning
         
-        randomButton.setTitle(p2.token, for: .normal)
-        game.placeToken(p2.token, randomButton.tag)
+        let spaceToBlock = game.spaceToBlock(p1.token)
+        
+        if (spaceToBlock != -1){
+            for freeSpace in freeSpaces{
+                if(freeSpace.tag == spaceToBlock){
+                    freeSpace.setTitle(p2.token, for: .normal)
+                    game.placeToken(p2.token, freeSpace.tag)
+                }
+            }
+        } else {
+            //random button
+            let randomIndex = Int(arc4random_uniform(UInt32(freeSpaces.count)))
+            let randomButton = freeSpaces[randomIndex]
+            randomButton.setTitle(p2.token, for: .normal)
+            game.placeToken(p2.token, randomButton.tag)
+        }
         currentTurn = Turn.p1
         setTurnLabel(p1)
-        
     }
    
     func setFirstTurn() {
@@ -185,7 +199,6 @@ class GameViewController: UIViewController {
             currentTurn = Turn.p1
             setTurnLabel(p1)
         }
-        
     }
     
     func resetBoard(){
