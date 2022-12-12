@@ -14,7 +14,7 @@ class Player {
     let token: String
     var score: Int
     
-    init(name: String, token: String, score: Int) {
+    init(_ name: String, token: String, score: Int) {
         self.name = name
         self.token = token
         self.score = score

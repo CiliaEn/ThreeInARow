@@ -1,44 +1,43 @@
 //
-//  TwoPlayerViewController.swift
+//  OnePlayerViewController.swift
 //  ThreeInARow
 //
-//  Created by Cilia Ence on 2022-12-07.
+//  Created by Cilia Ence on 2022-12-09.
 //  Copyright © 2022 Cilia Ence. All rights reserved.
 //
 
 import UIKit
 
-class TwoPlayerViewController: UIViewController {
+class OnePlayerViewController: UIViewController {
     
-    let twoPlayerGameSegueId = "twoPlayerGameSegue"
-    
-    @IBOutlet var player1TextField: UITextField!
-    @IBOutlet var player2TextField: UITextField!
+    let onePlayerGameSegueId = "onePlayerGameSegue"
     
     var player1Name : String?
     var player2Name : String?
     
+    @IBOutlet var player1TextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
-    @IBAction func newGame(_ sender: UIButton) {
+    @IBAction func startPlayingTapped(_ sender: UIButton) {
+        
         if let p1Name = player1TextField.text {
             player1Name = p1Name
         }
-        if let p2Name = player2TextField.text {
-            player2Name = p2Name
-        }
+        player2Name = "Computer"
+        performSegue(withIdentifier: onePlayerGameSegueId, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == twoPlayerGameSegueId {
+        if segue.identifier == onePlayerGameSegueId {
             if let destinationVC = segue.destination as? GameViewController  {
+                
                 destinationVC.p1Name = player1Name
                 destinationVC.p2Name = player2Name
+                destinationVC.onePlayerMode = true
             }
         }
     }

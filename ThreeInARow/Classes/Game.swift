@@ -30,12 +30,12 @@ class Game {
         for row in board {
             for space in row {
                 if (space.isEmpty){
-                    isOver = true
                     return false
                 }
             }
         }
-        //returns true if there are still free spaces
+        //returns true if board is full
+        isOver = true
         return true
     }
     

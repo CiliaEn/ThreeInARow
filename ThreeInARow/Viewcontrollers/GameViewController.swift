@@ -10,18 +10,16 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    var p1 : Player?
-    var p2 : Player?
-    var p1Name = "Player 1"
-    var p2Name = "Player 2"
-    var p1Score : Int = 0
-    var p2Score : Int = 0
-    var game = Game()
-    let firstTurn = Turn.p1
-    var currentTurn = Turn.p1
+    var p1Name : String?
+    var p2Name : String?
     
-    let CIRCLE = "O"
-    let CROSS = "X"
+    var p1 = Player("", token: "", score: 0)
+    var p2 = Player("", token: "", score: 0)
+    
+    var firstTurn = Turn.p1
+    var currentTurn = Turn.p1
+    var game = Game()
+    var onePlayerMode : Bool?
     var listOfButtons = [UIButton]()
     
     enum Turn {
@@ -43,23 +41,21 @@ class GameViewController: UIViewController {
     @IBOutlet var c2: UIButton!
     @IBOutlet var c3: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let player1 = p1 {
-            p1Name = player1.name
-            player1Label.text = "\(p1Name): 0"
-            turnLabel.text = "\(p1Name) make your move!"
-            
-            if let player2 = p2 {
-                p2Name = player2.name
-                player2Label.text = "\(p2Name): 0"
-            }
+        
+        if let player1Name = p1Name {
+            p1 = Player(player1Name, token: "O", score: 0)
+            player1Label.text = "\(p1.name): \(p1.score)"
+            setTurnLabel(p1)
+        }
+        if let player2Name = p2Name {
+            p2 = Player(player2Name, token: "X", score: 0)
+            player2Label.text = "\(p2.name): \(p2.score)"
         }
         setTagsForButtons()
         setListOfButtons()
-        
+        turnLabel.isUserInteractionEnabled = false
     }
     
     func setTagsForButtons() {
@@ -85,11 +81,111 @@ class GameViewController: UIViewController {
         listOfButtons.append(c2)
         listOfButtons.append(c3)
     }
+    
+    @IBAction func boardButtonTapped(_ sender: UIButton) {
+        placeToken(sender)
+    }
+    
+    func placeToken(_ sender: UIButton){
+        
+        //checks if place is empty
+        if(sender.title(for: .normal) == nil){
+            
+            if (currentTurn == Turn.p1){
+                sender.setTitle(p1.token, for: .normal)
+                game.placeToken(p1.token, sender.tag)
+                currentTurn = Turn.p2
+                setTurnLabel(p2)
+                checkIfGameIsOver()
+                
+                
+             if onePlayerMode != nil {
+                    if (game.isOver == false){
+                            makeMove()
+                            checkIfGameIsOver()
+                        }
+                    }
+                
+            } else if (currentTurn == Turn.p2){
+                sender.setTitle(p2.token, for: .normal)
+                game.placeToken(p2.token, sender.tag)
+                currentTurn = Turn.p1
+                setTurnLabel(p1)
+                checkIfGameIsOver()
+            }
+        }
+    }
+    
     @IBAction func labelTapped(_ sender: UITapGestureRecognizer) {
         
-            if(game.isOver){
-                resetBoard()
+        if(game.isOver){
+            resetBoard()
+            turnLabel.isUserInteractionEnabled = false
+            setFirstTurn()
+        }
+    }
+    
+    func setTurnLabel(_ player : Player){
+        turnLabel.text = "\(player.name) make your move!"
+    }
+    
+    func checkIfGameIsOver() {
+        
+        //check if someone has won
+        if (game.checkForWin(p1.token)){
+            disableBoard()
+            turnLabel.text = "\(p1.name) won! Press to play again!"
+            p1.score += 1
+            player1Label.text = "\(p1.name): \(p1.score)"
+        } else if (game.checkForWin(p2.token)){
+            disableBoard()
+            turnLabel.text = "\(p2.name) won! Press to play again!"
+            p2.score += 1
+            player2Label.text = "\(p2.name): \(p2.score)"
+        }
+            //Check if its a tie
+        else if(game.boardIsFull()){
+            turnLabel.text = "It's a tie! Press to play again!"
+            turnLabel.isUserInteractionEnabled = true
+        }
+    }
+    
+    //make move for the computer
+    func makeMove(){
+        
+        var freeSpaces = [UIButton]()
+        
+        for button in listOfButtons {
+            if(button.title(for: .normal) == nil){
+                freeSpaces.append(button)
             }
+        }
+        let randomIndex = Int(arc4random_uniform(UInt32(freeSpaces.count)))
+        let randomButton = freeSpaces[randomIndex]
+        
+        randomButton.setTitle(p2.token, for: .normal)
+        game.placeToken(p2.token, randomButton.tag)
+        currentTurn = Turn.p1
+        setTurnLabel(p1)
+        
+    }
+   
+    func setFirstTurn() {
+        
+        if (firstTurn == Turn.p1){
+            if onePlayerMode == nil{
+                firstTurn = Turn.p2
+                currentTurn = Turn.p2
+                setTurnLabel(p2)
+            }
+            currentTurn = Turn.p1
+            setTurnLabel(p1)
+        } else{
+            firstTurn = Turn.p1
+            currentTurn = Turn.p1
+            setTurnLabel(p1)
+        }
+        
     }
     
     func resetBoard(){
@@ -100,56 +196,16 @@ class GameViewController: UIViewController {
         game = Game()
     }
     
-    
-    @IBAction func boardButtonTapped(_ sender: UIButton) {
-        
-        placeToken(sender)
-        
-        //check if someone has won
-        if (game.checkForWin(CIRCLE)){
-            disableBoard()
-            turnLabel.text = "\(p1Name) won! Press to play again!"
-            p1Score += 1
-            player1Label.text = "\(p1Name): \(p1Score)"
-        } else if (game.checkForWin(CROSS)){
-            disableBoard()
-            turnLabel.text = "\(p2Name) won! Press to play again!"
-            p2Score += 1
-            player2Label.text = "\(p2Name): \(p2Score)"
-        }
-        //Check if its a tie
-        else if(game.boardIsFull()){
-            turnLabel.text = "It's a tie! Press to play again!"
-        }
-    }
-    
-    func placeToken(_ sender: UIButton){
-        
-        //checks if place is empty
-        if(sender.title(for: .normal) == nil){
-            
-            if (currentTurn == Turn.p1){
-                sender.setTitle(CIRCLE, for: .normal)
-                game.placeToken(CIRCLE, sender.tag)
-                currentTurn = Turn.p2
-                turnLabel.text = "\(p2Name) make your move!"
-            } else if (currentTurn == Turn.p2){
-                sender.setTitle(CROSS, for: .normal)
-                game.placeToken(CROSS, sender.tag)
-                currentTurn = Turn.p1
-                turnLabel.text = "\(p1Name) make your move!"
-            }
-        }
-    }
-    
     func disableBoard(){
         for button in listOfButtons {
             button.isEnabled = false
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        game.isOver = true
+        turnLabel.isUserInteractionEnabled = true
     }
 }
+
+
+
+
+
