@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Bb-Mr-Lza">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -31,6 +31,7 @@
                                 <state key="normal" title="1-player"/>
                                 <connections>
                                     <action selector="onePlayer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7o6-Xm-RwP"/>
+                                    <segue destination="lzy-KC-lG6" kind="show" identifier="onePlayerSegue" id="rux-t6-VfB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4u-0J-5JF">
@@ -61,7 +62,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-73" y="124"/>
+            <point key="canvasLocation" x="23" y="121"/>
         </scene>
         <!--Two Player View Controller-->
         <scene sceneID="h3o-Ge-DNk">
@@ -95,7 +96,7 @@
                                 <state key="normal" title="Start playing"/>
                                 <connections>
                                     <action selector="newGame:" destination="2Bb-Mr-Lza" eventType="touchUpInside" id="h9K-RJ-I7c"/>
-                                    <segue destination="P55-sL-6DN" kind="show" identifier="newGameSegue" id="K6B-St-kmg"/>
+                                    <segue destination="P55-sL-6DN" kind="show" identifier="twoPlayerGameSegue" id="K6B-St-kmg"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cgp-k7-kHd">
@@ -127,7 +128,57 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rZ-Id-kcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="834" y="-82"/>
+            <point key="canvasLocation" x="822" y="-233"/>
+        </scene>
+        <!--One Player View Controller-->
+        <scene sceneID="Med-lo-evg">
+            <objects>
+                <viewController id="lzy-KC-lG6" customClass="OnePlayerViewController" customModule="ThreeInARow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2NB-1J-2M7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fM-AH-dOO">
+                                <rect key="frame" x="138.66666666666666" y="275" width="97.666666666666657" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FFI-Az-JtS">
+                                <rect key="frame" x="174.66666666666666" y="309" width="25" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQI-iW-B6c">
+                                <rect key="frame" x="132" y="512" width="110" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Start playing"/>
+                                <connections>
+                                    <action selector="startPlayingTapped:" destination="lzy-KC-lG6" eventType="touchUpInside" id="HG2-Uc-L5j"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FFI-Az-JtS" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="CGS-pC-h4i"/>
+                            <constraint firstItem="7fM-AH-dOO" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="Uvn-We-Oyv"/>
+                            <constraint firstItem="7fM-AH-dOO" firstAttribute="top" secondItem="sA7-qD-zIi" secondAttribute="top" constant="231" id="ouo-Fa-gOg"/>
+                            <constraint firstItem="FFI-Az-JtS" firstAttribute="top" secondItem="7fM-AH-dOO" secondAttribute="bottom" constant="10" id="pTu-6A-C44"/>
+                            <constraint firstItem="nQI-iW-B6c" firstAttribute="top" secondItem="FFI-Az-JtS" secondAttribute="bottom" constant="173" id="qgm-EA-Fzw"/>
+                            <constraint firstItem="FFI-Az-JtS" firstAttribute="top" secondItem="7fM-AH-dOO" secondAttribute="bottom" constant="10" id="tCh-FS-wah"/>
+                            <constraint firstItem="nQI-iW-B6c" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="zBO-Hw-vIn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sA7-qD-zIi"/>
+                    </view>
+                    <connections>
+                        <outlet property="player1TextField" destination="FFI-Az-JtS" id="SMH-M2-pKG"/>
+                        <segue destination="P55-sL-6DN" kind="show" identifier="onePlayerGameSegue" id="DIe-hJ-Ezj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9rD-O3-n6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="822" y="514"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="pDI-1d-jH5">
@@ -286,7 +337,7 @@
                                     <constraint firstItem="wsL-pk-2QJ" firstAttribute="width" secondItem="RQX-gh-pQD" secondAttribute="width" id="zf7-jk-LS8"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player 1 make your move" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5q-6g-q9I">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player 1 make your move!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5q-6g-q9I">
                                 <rect key="frame" x="56" y="619" width="262" height="104"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -333,7 +384,10 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1829.5999999999999" y="122.66009852216749"/>
+            <point key="canvasLocation" x="1676" y="181"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="DIe-hJ-Ezj"/>
+    </inferredMetricsTieBreakers>
 </document>
