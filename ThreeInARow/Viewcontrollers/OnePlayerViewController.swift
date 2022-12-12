@@ -10,49 +10,35 @@ import UIKit
 
 class OnePlayerViewController: UIViewController {
     
-    let newGameSegueId = "onePlayerGameSegue"
+    let onePlayerGameSegueId = "onePlayerGameSegue"
+    
+    var player1Name : String?
+    var player2Name : String?
     
     @IBOutlet var player1TextField: UITextField!
     
-    var player1 : Player?
-    var player2 : Player?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-    
     
     @IBAction func startPlayingTapped(_ sender: UIButton) {
         
-        if let player1Name = player1TextField.text {
-            print("1")
-            player1 = Player(name: player1Name, token: "O", score: 0)
+        if let p1Name = player1TextField.text {
+            player1Name = p1Name
         }
-        print("1.5")
-        player2 = Player(name: "Computer", token: "X", score: 0)
-        
+        player2Name = "Computer"
+        performSegue(withIdentifier: onePlayerGameSegueId, sender: self)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == newGameSegueId {
+        if segue.identifier == onePlayerGameSegueId {
             if let destinationVC = segue.destination as? GameViewController  {
                 
-                destinationVC.p1 = player1
-                print("2")
-                destinationVC.p2 = player2
+                destinationVC.p1Name = player1Name
+                destinationVC.p2Name = player2Name
                 destinationVC.onePlayerMode = true
             }
         }
     }
-    
-
 }

@@ -62,7 +62,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-73" y="124"/>
+            <point key="canvasLocation" x="23" y="121"/>
         </scene>
         <!--Two Player View Controller-->
         <scene sceneID="h3o-Ge-DNk">
@@ -128,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rZ-Id-kcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="823" y="-150"/>
+            <point key="canvasLocation" x="822" y="-233"/>
         </scene>
         <!--One Player View Controller-->
         <scene sceneID="Med-lo-evg">
@@ -156,7 +156,6 @@
                                 <state key="normal" title="Start playing"/>
                                 <connections>
                                     <action selector="startPlayingTapped:" destination="lzy-KC-lG6" eventType="touchUpInside" id="HG2-Uc-L5j"/>
-                                    <segue destination="P55-sL-6DN" kind="show" identifier="onePlayerGameSegue" id="PAo-PO-tGJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -174,11 +173,12 @@
                     </view>
                     <connections>
                         <outlet property="player1TextField" destination="FFI-Az-JtS" id="SMH-M2-pKG"/>
+                        <segue destination="P55-sL-6DN" kind="show" identifier="onePlayerGameSegue" id="DIe-hJ-Ezj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9rD-O3-n6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="808" y="556"/>
+            <point key="canvasLocation" x="822" y="514"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="pDI-1d-jH5">
@@ -337,7 +337,7 @@
                                     <constraint firstItem="wsL-pk-2QJ" firstAttribute="width" secondItem="RQX-gh-pQD" secondAttribute="width" id="zf7-jk-LS8"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player 1 make your move" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5q-6g-q9I">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Player 1 make your move!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5q-6g-q9I">
                                 <rect key="frame" x="56" y="619" width="262" height="104"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -384,10 +384,10 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1718" y="185"/>
+            <point key="canvasLocation" x="1676" y="181"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="K6B-St-kmg"/>
+        <segue reference="DIe-hJ-Ezj"/>
     </inferredMetricsTieBreakers>
 </document>

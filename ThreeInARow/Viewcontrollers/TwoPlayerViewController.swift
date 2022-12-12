@@ -11,46 +11,35 @@ import UIKit
 class TwoPlayerViewController: UIViewController {
     
     let twoPlayerGameSegueId = "twoPlayerGameSegue"
-
+    
     @IBOutlet var player1TextField: UITextField!
     @IBOutlet var player2TextField: UITextField!
     
-    var player1 : Player?
-    var player2 : Player?
+    var player1Name : String?
+    var player2Name : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func newGame(_ sender: UIButton) {
-        if let player1Name = player1TextField.text {
-            player1 = Player(name: player1Name, token: "O", score: 0)
-            print("1")
+        if let p1Name = player1TextField.text {
+            player1Name = p1Name
         }
-        if let player2Name = player2TextField.text {
-            player2 = Player(name: player2Name, token: "X", score: 0)
+        if let p2Name = player2TextField.text {
+            player2Name = p2Name
         }
-        
     }
     
-   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == twoPlayerGameSegueId {
             if let destinationVC = segue.destination as? GameViewController  {
-                print("2")
-                destinationVC.p1 = player1
-                destinationVC.p2 = player2
+                destinationVC.p1Name = player1Name
+                destinationVC.p2Name = player2Name
             }
         }
     }
-    
-
 }
