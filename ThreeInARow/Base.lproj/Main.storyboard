@@ -138,8 +138,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fM-AH-dOO">
-                                <rect key="frame" x="138.66666666666666" y="275" width="97.666666666666657" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Your name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fM-AH-dOO">
+                                <rect key="frame" x="139" y="277" width="97.666666666666657" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -151,34 +151,67 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQI-iW-B6c">
-                                <rect key="frame" x="132" y="512" width="110" height="36"/>
+                                <rect key="frame" x="132" y="593.66666666666663" width="110" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Start playing"/>
                                 <connections>
                                     <action selector="startPlayingTapped:" destination="lzy-KC-lG6" eventType="touchUpInside" id="HG2-Uc-L5j"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzq-oO-sWQ">
+                                <rect key="frame" x="144.66666666666666" y="435.66666666666669" width="86" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="MEDIUM"/>
+                                <connections>
+                                    <action selector="mediumButtonTapped:" destination="lzy-KC-lG6" eventType="touchUpInside" id="d72-jT-CtE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pI7-hc-S7q">
+                                <rect key="frame" x="157.66666666666666" y="484.66666666666669" width="59" height="39.000000000000057"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="HARD"/>
+                                <connections>
+                                    <action selector="hardButtonTapped:" destination="lzy-KC-lG6" eventType="touchUpInside" id="Bhj-OR-XOa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMf-Px-qgt">
+                                <rect key="frame" x="160.66666666666666" y="386.66666666666669" width="54" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="EASY"/>
+                                <connections>
+                                    <action selector="easyButtonTapped:" destination="lzy-KC-lG6" eventType="touchUpInside" id="mcg-9v-HEe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gMf-Px-qgt" firstAttribute="centerY" secondItem="2NB-1J-2M7" secondAttribute="centerY" id="2Lc-KT-2fi"/>
                             <constraint firstItem="FFI-Az-JtS" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="CGS-pC-h4i"/>
+                            <constraint firstItem="Qzq-oO-sWQ" firstAttribute="top" secondItem="gMf-Px-qgt" secondAttribute="bottom" constant="10" id="PPV-ny-FPS"/>
                             <constraint firstItem="7fM-AH-dOO" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="Uvn-We-Oyv"/>
+                            <constraint firstItem="gMf-Px-qgt" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="VpD-ZC-CN3"/>
+                            <constraint firstItem="nQI-iW-B6c" firstAttribute="top" secondItem="pI7-hc-S7q" secondAttribute="bottom" constant="70" id="eXM-2s-9rP"/>
+                            <constraint firstItem="pI7-hc-S7q" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="nf8-PE-CwZ"/>
                             <constraint firstItem="7fM-AH-dOO" firstAttribute="top" secondItem="sA7-qD-zIi" secondAttribute="top" constant="231" id="ouo-Fa-gOg"/>
                             <constraint firstItem="FFI-Az-JtS" firstAttribute="top" secondItem="7fM-AH-dOO" secondAttribute="bottom" constant="10" id="pTu-6A-C44"/>
-                            <constraint firstItem="nQI-iW-B6c" firstAttribute="top" secondItem="FFI-Az-JtS" secondAttribute="bottom" constant="173" id="qgm-EA-Fzw"/>
                             <constraint firstItem="FFI-Az-JtS" firstAttribute="top" secondItem="7fM-AH-dOO" secondAttribute="bottom" constant="10" id="tCh-FS-wah"/>
+                            <constraint firstItem="pI7-hc-S7q" firstAttribute="top" secondItem="Qzq-oO-sWQ" secondAttribute="bottom" constant="10" id="tRO-PO-s5u"/>
+                            <constraint firstItem="Qzq-oO-sWQ" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="u8W-E4-Nxo"/>
                             <constraint firstItem="nQI-iW-B6c" firstAttribute="centerX" secondItem="2NB-1J-2M7" secondAttribute="centerX" id="zBO-Hw-vIn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sA7-qD-zIi"/>
                     </view>
                     <connections>
+                        <outlet property="easyButton" destination="gMf-Px-qgt" id="DzR-4l-MAo"/>
+                        <outlet property="hardButton" destination="pI7-hc-S7q" id="PZ9-Zv-syT"/>
+                        <outlet property="mediumButton" destination="Qzq-oO-sWQ" id="BsW-AJ-Tn2"/>
                         <outlet property="player1TextField" destination="FFI-Az-JtS" id="SMH-M2-pKG"/>
                         <segue destination="P55-sL-6DN" kind="show" identifier="onePlayerGameSegue" id="DIe-hJ-Ezj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9rD-O3-n6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="822" y="514"/>
+            <point key="canvasLocation" x="821.60000000000002" y="513.54679802955673"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="pDI-1d-jH5">

@@ -19,6 +19,8 @@ class GameViewController: UIViewController {
     var currentTurn = Turn.p1
     var game = Game()
     var onePlayerMode : Bool?
+    var gameMode : String?
+    var mode = ""
     var listOfButtons = [UIButton]()
     
     enum Turn {
@@ -51,6 +53,9 @@ class GameViewController: UIViewController {
         if let player2Name = p2Name {
             p2 = Player(player2Name, token: "X", score: 0)
             player2Label.text = "\(p2.name): \(p2.score)"
+        }
+        if let gameMode = gameMode {
+            mode = gameMode
         }
         addButtonTags()
         addButtonsToList()
@@ -92,10 +97,9 @@ class GameViewController: UIViewController {
             
             if (currentTurn == Turn.p1){
                 placeToken(sender, p1.token)
-                
                 currentTurn = Turn.p2
-                checkIfGameIsOver()
                 setTurnLabel(p2)
+                checkIfGameIsOver()
                 
                 //makes move for the computer if it's oneplayer-mode
                 if onePlayerMode != nil {
@@ -107,10 +111,9 @@ class GameViewController: UIViewController {
                 
             } else if (currentTurn == Turn.p2){
                 placeToken(sender, p2.token)
-                
                 currentTurn = Turn.p1
-                checkIfGameIsOver()
                 setTurnLabel(p1)
+                checkIfGameIsOver()
             }
         }
     }
@@ -132,19 +135,19 @@ class GameViewController: UIViewController {
         //pane to block if p1 has two in a row
         let paneToBlock = game.paneToPlay(p1.token)
         
-        if (paneToPlay != -1){
+        if (mode == "hard" && paneToPlay != -1){
             for freeSpace in freeSpaces{
                 if(freeSpace.tag == paneToPlay){
                     placeToken(freeSpace, p2.token)
                 }
             }
-        } else if (paneToBlock != -1) {
+        } else if (mode == "medium" || mode == "hard" && paneToBlock != -1) {
             for freeSpace in freeSpaces{
                 if(freeSpace.tag == paneToBlock){
                     placeToken(freeSpace, p2.token)
                 }
             }
-        } else{
+        } else {
             let randomIndex = Int(arc4random_uniform(UInt32(freeSpaces.count)))
             let randomButton = freeSpaces[randomIndex]
             placeToken(randomButton, p2.token)
