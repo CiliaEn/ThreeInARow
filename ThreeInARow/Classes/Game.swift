@@ -21,20 +21,18 @@ class Game {
         
         let x = xy / 10
         let y = xy - (x * 10)
-        //print("\(x)\(y)")
         board[x][y] = token
-        
     }
+    
     func boardIsFull() -> Bool {
         
         for row in board {
-            for space in row {
-                if (space.isEmpty){
+            for pane in row {
+                if (pane.isEmpty){
                     return false
                 }
             }
         }
-        //returns true if board is full
         isOver = true
         return true
     }
@@ -44,7 +42,7 @@ class Game {
         //Checks if someone has won horizontally
         for i in 0..<3 {
             
-            if (space(0, i, contains: s) && space(1, i, contains: s) && space(2, i, contains: s)){
+            if (pane(0, i, contains: s) && pane(1, i, contains: s) && pane(2, i, contains: s)){
                 isOver = true
                 return true
             }
@@ -52,24 +50,24 @@ class Game {
         //Checks if someone has won vertically
         for i in 0..<3 {
             
-            if (space(i, 0, contains: s) && space(i, 1, contains: s) && space(i, 2, contains: s)){
+            if (pane(i, 0, contains: s) && pane(i, 1, contains: s) && pane(i, 2, contains: s)){
                 isOver = true
                 return true
             }
         }
         //Checks if someone has won diagonally
-        if (space(0, 0, contains: s) && space(1, 1, contains: s) && space(2, 2, contains: s)){
+        if (pane(0, 0, contains: s) && pane(1, 1, contains: s) && pane(2, 2, contains: s)){
             isOver = true
             return true
         }
-        if (space(0, 2, contains: s) && space(1, 1, contains: s) && space(2, 0, contains: s)){
+        if (pane(0, 2, contains: s) && pane(1, 1, contains: s) && pane(2, 0, contains: s)){
             isOver = true
             return true
         }
         return false
     }
     
-    func space(_ x: Int, _ y : Int, contains token: String) -> Bool {
+    func pane(_ x: Int, _ y : Int, contains token: String) -> Bool {
         
         if(board[x][y] == token){
             return true
@@ -77,70 +75,69 @@ class Game {
         return false
     }
     
-    func spaceToBlock(_ s: String) -> Int {
+    func paneToPlay(_ s: String) -> Int {
         
-        //Checks if someone has 2 horizontally
+        //Checks if player1 has 2 horizontally
         for i in 0..<3 {
             
-            if (space(1, i, contains: s) && space(2, i, contains: s)){
+            if (pane(1, i, contains: s) && pane(2, i, contains: s)){
                 if (board[0][i].isEmpty) {
                     return 0 + i
                 }
             }
-            if (space(0, i, contains: s) && space(2, i, contains: s)){
+            if (pane(0, i, contains: s) && pane(2, i, contains: s)){
                 if (board[1][i].isEmpty) {
                     return 10 + i
                 }
-                
             }
-            if (space(0, i, contains: s) && space(1, i, contains: s)){
+            if (pane(0, i, contains: s) && pane(1, i, contains: s)){
                 if (board[2][i].isEmpty) {
                     return 20 + i
                 }
             }
         }
-        //Checks if someone has 2 vertically
+        //Checks if player1 has 2 vertically
         for i in 0..<3 {
             
-            if (space(i, 1, contains: s) && space(i, 2, contains: s)){
+            if (pane(i, 1, contains: s) && pane(i, 2, contains: s)){
                 if (board[i][0].isEmpty){
                     return i * 10
                 }
             }
-            if (space(i, 0, contains: s) && space(i, 2, contains: s)){
+            if (pane(i, 0, contains: s) && pane(i, 2, contains: s)){
                 if (board[i][1].isEmpty){
                     return i * 10 + 1
                 }
             }
-            if (space(i, 0, contains: s) && space(i, 1, contains: s)){
+            if (pane(i, 0, contains: s) && pane(i, 1, contains: s)){
                 if (board[i][2].isEmpty){
                     return i * 10 + 2
                 }
             }
         }
-        //Checks if someone has 2 diagonally
-        if (space(0, 0, contains: s) && space(1, 1, contains: s)){
+        //Checks if player1 has 2 diagonally
+        if (pane(0, 0, contains: s) && pane(1, 1, contains: s)){
             if (board[2][2].isEmpty){
                 return 22
             }
         }
-        if (space(2, 2, contains: s) && space(0, 0, contains: s))
-            || (space(0, 2, contains: s) && space(2, 0, contains: s)){
+        if (pane(2, 2, contains: s) && pane(0, 0, contains: s))
+            || (pane(0, 2, contains: s) && pane(2, 0, contains: s)){
             if (board[1][1].isEmpty){
                 return 11
             }
         }
-        if (space(1, 1, contains: s) && space(2, 2, contains: s)) {
+        if (pane(1, 1, contains: s) && pane(2, 2, contains: s)) {
             if (board[0][0].isEmpty){
                 return 0
             }
         }
-        if (space(0, 2, contains: s) && space(1, 1, contains: s)){
+        if (pane(0, 2, contains: s) && pane(1, 1, contains: s)){
             if (board[2][0].isEmpty){
                 return 20
             }
         }
-        if (space(2, 0, contains: s) && space(1, 1, contains: s)){
+        if (pane(2, 0, contains: s) && pane(1, 1, contains: s)){
             if (board[0][2].isEmpty){
                 return 2
             }

@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     
     @IBAction func twoPlayer(_ sender: UIButton) {
         performSegue(withIdentifier: twoPlayerSegueId, sender: self)
-        
     }
 }
 
