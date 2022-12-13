@@ -99,12 +99,12 @@ class GameViewController: UIViewController {
                 checkIfGameIsOver()
                 
                 
-             if onePlayerMode != nil {
+                if onePlayerMode != nil {
                     if (game.isOver == false){
-                            makeMove()
-                            checkIfGameIsOver()
-                        }
+                        makeMove()
+                        checkIfGameIsOver()
                     }
+                }
                 
             } else if (currentTurn == Turn.p2){
                 sender.setTitle(p2.token, for: .normal)
@@ -162,18 +162,25 @@ class GameViewController: UIViewController {
                 freeSpaces.append(button)
             }
         }
-        //prevent p1 from winning
-        
+        //if computer has 2 in a row, make it three
+        let spaceToPlay = game.spaceToBlock(p2.token)
         let spaceToBlock = game.spaceToBlock(p1.token)
         
-        if (spaceToBlock != -1){
+        if (spaceToPlay != -1){
+            for freeSpace in freeSpaces{
+                if(freeSpace.tag == spaceToPlay){
+                    freeSpace.setTitle(p2.token, for: .normal)
+                    game.placeToken(p2.token, freeSpace.tag)
+                }
+            }
+        } else if (spaceToBlock != -1) {
             for freeSpace in freeSpaces{
                 if(freeSpace.tag == spaceToBlock){
                     freeSpace.setTitle(p2.token, for: .normal)
                     game.placeToken(p2.token, freeSpace.tag)
                 }
             }
-        } else {
+        } else{
             //random button
             let randomIndex = Int(arc4random_uniform(UInt32(freeSpaces.count)))
             let randomButton = freeSpaces[randomIndex]
@@ -182,8 +189,9 @@ class GameViewController: UIViewController {
         }
         currentTurn = Turn.p1
         setTurnLabel(p1)
+        
     }
-   
+    
     func setFirstTurn() {
         
         if (firstTurn == Turn.p1){

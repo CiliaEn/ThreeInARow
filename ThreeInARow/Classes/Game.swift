@@ -9,7 +9,7 @@
 import Foundation
 
 class Game {
- 
+    
     var board = [  ["", "", ""],
                    ["", "", ""],
                    ["", "", ""]
@@ -18,10 +18,10 @@ class Game {
     var isOver = false
     
     func placeToken(_ token : String, _ xy : Int) {
-
+        
         let x = xy / 10
         let y = xy - (x * 10)
-        print("\(x)\(y)")
+        //print("\(x)\(y)")
         board[x][y] = token
         
     }
@@ -83,44 +83,67 @@ class Game {
         for i in 0..<3 {
             
             if (space(1, i, contains: s) && space(2, i, contains: s)){
-                return 0 + i
+                if (board[0][i].isEmpty) {
+                    return 0 + i
+                }
             }
             if (space(0, i, contains: s) && space(2, i, contains: s)){
-                return 10 + i
+                if (board[1][i].isEmpty) {
+                    return 10 + i
+                }
+                
             }
             if (space(0, i, contains: s) && space(1, i, contains: s)){
-                return 20 + i
+                if (board[2][i].isEmpty) {
+                    return 20 + i
+                }
             }
         }
         //Checks if someone has 2 vertically
         for i in 0..<3 {
             
             if (space(i, 1, contains: s) && space(i, 2, contains: s)){
-                return i * 10
+                if (board[i][0].isEmpty){
+                    return i * 10
+                }
             }
             if (space(i, 0, contains: s) && space(i, 2, contains: s)){
-                return i * 10 + 1
+                if (board[i][1].isEmpty){
+                    return i * 10 + 1
+                }
             }
             if (space(i, 0, contains: s) && space(i, 1, contains: s)){
-                return i * 10 + 2
+                if (board[i][2].isEmpty){
+                    return i * 10 + 2
                 }
+            }
         }
         //Checks if someone has 2 diagonally
         if (space(0, 0, contains: s) && space(1, 1, contains: s)){
-            return 22
+            if (board[2][2].isEmpty){
+                return 22
             }
+        }
         if (space(2, 2, contains: s) && space(0, 0, contains: s))
-        || (space(0, 2, contains: s) && space(2, 0, contains: s)){
-            return 11
+            || (space(0, 2, contains: s) && space(2, 0, contains: s)){
+            if (board[1][1].isEmpty){
+                return 11
+            }
         }
         if (space(1, 1, contains: s) && space(2, 2, contains: s)) {
-            return 0
+            if (board[0][0].isEmpty){
+                return 0
+            }
         }
         if (space(0, 2, contains: s) && space(1, 1, contains: s)){
-            return 20
+            if (board[2][0].isEmpty){
+                return 20
+            }
         }
         if (space(2, 0, contains: s) && space(1, 1, contains: s)){
-            return 2
+            if (board[0][2].isEmpty){
+                return 2
+            }
         }
         return -1
     }
