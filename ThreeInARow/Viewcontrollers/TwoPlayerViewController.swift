@@ -20,11 +20,10 @@ class TwoPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func newGame(_ sender: UIButton) {
+        
         if let p1Name = player1TextField.text {
             player1Name = p1Name
         }

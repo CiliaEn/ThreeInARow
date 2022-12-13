@@ -12,7 +12,6 @@ class GameViewController: UIViewController {
     
     var p1Name : String?
     var p2Name : String?
-    
     var p1 = Player("", token: "", score: 0)
     var p2 = Player("", token: "", score: 0)
     
@@ -53,15 +52,15 @@ class GameViewController: UIViewController {
             p2 = Player(player2Name, token: "X", score: 0)
             player2Label.text = "\(p2.name): \(p2.score)"
         }
-        setTagsForButtons()
-        setListOfButtons()
+        addButtonTags()
+        addButtonsToList()
         turnLabel.isUserInteractionEnabled = false
     }
     
-    func setTagsForButtons() {
-        a1.tag = 00
-        a2.tag = 01
-        a3.tag = 02
+    func addButtonTags() {
+        a1.tag = 0
+        a2.tag = 1
+        a3.tag = 2
         b1.tag = 10
         b2.tag = 11
         b3.tag = 12
@@ -70,7 +69,7 @@ class GameViewController: UIViewController {
         c3.tag = 22
     }
     
-    func setListOfButtons() {
+    func addButtonsToList() {
         listOfButtons.append(a1)
         listOfButtons.append(a2)
         listOfButtons.append(a3)
@@ -83,37 +82,80 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func boardButtonTapped(_ sender: UIButton) {
-        placeToken(sender)
+        makeMove(sender)
     }
     
-    func placeToken(_ sender: UIButton){
+    func makeMove(_ sender: UIButton){
         
-        //checks if place is empty
+        //checks if pane is empty
         if(sender.title(for: .normal) == nil){
             
             if (currentTurn == Turn.p1){
-                sender.setTitle(p1.token, for: .normal)
-                game.placeToken(p1.token, sender.tag)
+                placeToken(sender, p1.token)
+                
                 currentTurn = Turn.p2
-                setTurnLabel(p2)
                 checkIfGameIsOver()
+                setTurnLabel(p2)
                 
-                
-             if onePlayerMode != nil {
+                //makes move for the computer if it's oneplayer-mode
+                if onePlayerMode != nil {
                     if (game.isOver == false){
-                            makeMove()
-                            checkIfGameIsOver()
-                        }
+                        makeMoveForPC()
+                        checkIfGameIsOver()
                     }
+                }
                 
             } else if (currentTurn == Turn.p2){
-                sender.setTitle(p2.token, for: .normal)
-                game.placeToken(p2.token, sender.tag)
+                placeToken(sender, p2.token)
+                
                 currentTurn = Turn.p1
-                setTurnLabel(p1)
                 checkIfGameIsOver()
+                setTurnLabel(p1)
             }
         }
+    }
+    
+    //make move for the computer
+    func makeMoveForPC(){
+        
+        //make new list of all the free spaces
+        var freeSpaces = [UIButton]()
+        
+        for button in listOfButtons {
+            if(button.title(for: .normal) == nil){
+                freeSpaces.append(button)
+            }
+        }
+        //pane to play if computer can win
+        let paneToPlay = game.paneToPlay(p2.token)
+        
+        //pane to block if p1 has two in a row
+        let paneToBlock = game.paneToPlay(p1.token)
+        
+        if (paneToPlay != -1){
+            for freeSpace in freeSpaces{
+                if(freeSpace.tag == paneToPlay){
+                    placeToken(freeSpace, p2.token)
+                }
+            }
+        } else if (paneToBlock != -1) {
+            for freeSpace in freeSpaces{
+                if(freeSpace.tag == paneToBlock){
+                    placeToken(freeSpace, p2.token)
+                }
+            }
+        } else{
+            let randomIndex = Int(arc4random_uniform(UInt32(freeSpaces.count)))
+            let randomButton = freeSpaces[randomIndex]
+            placeToken(randomButton, p2.token)
+        }
+        currentTurn = Turn.p1
+        setTurnLabel(p1)
+    }
+    
+    func placeToken(_ button : UIButton, _ token : String){
+        button.setTitle(token, for: .normal)
+        game.placeToken(token, button.tag)
     }
     
     @IBAction func labelTapped(_ sender: UITapGestureRecognizer) {
@@ -150,26 +192,6 @@ class GameViewController: UIViewController {
         }
     }
     
-    //make move for the computer
-    func makeMove(){
-        
-        var freeSpaces = [UIButton]()
-        
-        for button in listOfButtons {
-            if(button.title(for: .normal) == nil){
-                freeSpaces.append(button)
-            }
-        }
-        let randomIndex = Int(arc4random_uniform(UInt32(freeSpaces.count)))
-        let randomButton = freeSpaces[randomIndex]
-        
-        randomButton.setTitle(p2.token, for: .normal)
-        game.placeToken(p2.token, randomButton.tag)
-        currentTurn = Turn.p1
-        setTurnLabel(p1)
-        
-    }
-   
     func setFirstTurn() {
         
         if (firstTurn == Turn.p1){
@@ -185,7 +207,6 @@ class GameViewController: UIViewController {
             currentTurn = Turn.p1
             setTurnLabel(p1)
         }
-        
     }
     
     func resetBoard(){

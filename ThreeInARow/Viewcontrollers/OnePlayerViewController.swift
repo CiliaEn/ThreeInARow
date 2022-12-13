@@ -34,7 +34,6 @@ class OnePlayerViewController: UIViewController {
         
         if segue.identifier == onePlayerGameSegueId {
             if let destinationVC = segue.destination as? GameViewController  {
-                
                 destinationVC.p1Name = player1Name
                 destinationVC.p2Name = player2Name
                 destinationVC.onePlayerMode = true
