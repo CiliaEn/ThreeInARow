@@ -12,13 +12,15 @@ class GameViewController: UIViewController {
     
     var p1Name : String?
     var p2Name : String?
-    var p1 = Player("", token: "", score: 0)
-    var p2 = Player("", token: "", score: 0)
+    var p1 = Player("Player 1", token: "O", score: 0)
+    var p2 = Player("Player 2", token: "X", score: 0)
     
     var firstTurn = Turn.p1
     var currentTurn = Turn.p1
     var game = Game()
     var onePlayerMode : Bool?
+    var gameMode : String?
+    var mode = ""
     var listOfButtons = [UIButton]()
     
     enum Turn {
@@ -44,13 +46,22 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let player1Name = p1Name {
-            p1 = Player(player1Name, token: "O", score: 0)
-            player1Label.text = "\(p1.name): \(p1.score)"
-            setTurnLabel(p1)
+            if(!player1Name.isEmpty){
+                p1 = Player(player1Name, token: "O", score: 0)
+            }
         }
+        player1Label.text = "\(p1.name): \(p1.score)"
+        setTurn(p1, Turn.p1)
+        
         if let player2Name = p2Name {
-            p2 = Player(player2Name, token: "X", score: 0)
-            player2Label.text = "\(p2.name): \(p2.score)"
+            if (!player2Name.isEmpty){
+                p2 = Player(player2Name, token: "X", score: 0)
+            }
+        }
+        player2Label.text = "\(p2.name): \(p2.score)"
+        
+        if let gameMode = gameMode {
+            mode = gameMode
         }
         addButtonTags()
         addButtonsToList()
@@ -92,25 +103,21 @@ class GameViewController: UIViewController {
             
             if (currentTurn == Turn.p1){
                 placeToken(sender, p1.token)
-                
-                currentTurn = Turn.p2
+                setTurn(p2, Turn.p2)
                 checkIfGameIsOver()
-                setTurnLabel(p2)
                 
                 //makes move for the computer if it's oneplayer-mode
                 if onePlayerMode != nil {
                     if (game.isOver == false){
                         makeMoveForPC()
+                        setTurn(p1, Turn.p1)
                         checkIfGameIsOver()
                     }
                 }
-                
             } else if (currentTurn == Turn.p2){
                 placeToken(sender, p2.token)
-                
-                currentTurn = Turn.p1
+                setTurn(p1, Turn.p1)
                 checkIfGameIsOver()
-                setTurnLabel(p1)
             }
         }
     }
@@ -127,30 +134,28 @@ class GameViewController: UIViewController {
             }
         }
         //pane to play if computer can win
-        let paneToPlay = game.paneToPlay(p2.token)
+        let paneToPlay = game.hasTwoInARow(p2.token)
         
         //pane to block if p1 has two in a row
-        let paneToBlock = game.paneToPlay(p1.token)
+        let paneToBlock = game.hasTwoInARow(p1.token)
         
-        if (paneToPlay != -1){
+        if (mode == "hard" && paneToPlay != -1){
             for freeSpace in freeSpaces{
                 if(freeSpace.tag == paneToPlay){
                     placeToken(freeSpace, p2.token)
                 }
             }
-        } else if (paneToBlock != -1) {
-            for freeSpace in freeSpaces{
-                if(freeSpace.tag == paneToBlock){
-                    placeToken(freeSpace, p2.token)
+        } else if (mode == "medium" && paneToBlock != -1 || mode == "hard" && paneToBlock != -1) {
+                for freeSpace in freeSpaces{
+                    if(freeSpace.tag == paneToBlock){
+                        placeToken(freeSpace, p2.token)
+                    }
                 }
-            }
-        } else{
+        }else {
             let randomIndex = Int(arc4random_uniform(UInt32(freeSpaces.count)))
             let randomButton = freeSpaces[randomIndex]
             placeToken(randomButton, p2.token)
         }
-        currentTurn = Turn.p1
-        setTurnLabel(p1)
     }
     
     func placeToken(_ button : UIButton, _ token : String){
@@ -167,7 +172,8 @@ class GameViewController: UIViewController {
         }
     }
     
-    func setTurnLabel(_ player : Player){
+    func setTurn(_ player : Player, _ turn : Turn){
+        currentTurn = turn
         turnLabel.text = "\(player.name) make your move!"
     }
     
@@ -185,7 +191,7 @@ class GameViewController: UIViewController {
             p2.score += 1
             player2Label.text = "\(p2.name): \(p2.score)"
         }
-            //Check if its a tie
+        //check if its a tie
         else if(game.boardIsFull()){
             turnLabel.text = "It's a tie! Press to play again!"
             turnLabel.isUserInteractionEnabled = true
@@ -197,15 +203,12 @@ class GameViewController: UIViewController {
         if (firstTurn == Turn.p1){
             if onePlayerMode == nil{
                 firstTurn = Turn.p2
-                currentTurn = Turn.p2
-                setTurnLabel(p2)
+                setTurn(p2, Turn.p2)
             }
-            currentTurn = Turn.p1
-            setTurnLabel(p1)
+            setTurn(p1, Turn.p1)
         } else{
             firstTurn = Turn.p1
-            currentTurn = Turn.p1
-            setTurnLabel(p1)
+            setTurn(p1, Turn.p1)
         }
     }
     
@@ -223,6 +226,9 @@ class GameViewController: UIViewController {
         }
         game.isOver = true
         turnLabel.isUserInteractionEnabled = true
+    }
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
