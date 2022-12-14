@@ -25,25 +25,21 @@ class OnePlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        easyButton.isExclusiveTouch = true
-        mediumButton.isExclusiveTouch = true
-        hardButton.isExclusiveTouch = true
     }
     
     @IBAction func easyButtonTapped(_ sender: UIButton) {
         gameMode = "easy"
-        print("easy")
     }
     
     @IBAction func mediumButtonTapped(_ sender: UIButton) {
         gameMode = "medium"
-        print("medium")
     }
     
     @IBAction func hardButtonTapped(_ sender: UIButton) {
         gameMode = "hard"
-        print("hard")
+    }
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func startPlayingTapped(_ sender: UIButton) {
@@ -51,7 +47,6 @@ class OnePlayerViewController: UIViewController {
         if let p1Name = player1TextField.text {
             player1Name = p1Name
         }
-        player2Name = "Computer"
         performSegue(withIdentifier: onePlayerGameSegueId, sender: self)
     }
     
@@ -60,7 +55,7 @@ class OnePlayerViewController: UIViewController {
         if segue.identifier == onePlayerGameSegueId {
             if let destinationVC = segue.destination as? GameViewController  {
                 destinationVC.p1Name = player1Name
-                destinationVC.p2Name = player2Name
+                destinationVC.p2Name = "Computer"
                 destinationVC.onePlayerMode = true
                 destinationVC.gameMode = gameMode
             }

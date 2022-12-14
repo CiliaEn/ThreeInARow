@@ -75,7 +75,7 @@ class Game {
         return false
     }
     
-    func paneToPlay(_ s: String) -> Int {
+    func hasTwoInARow(_ s: String) -> Int {
         
         //Checks if player1 has 2 horizontally
         for i in 0..<3 {

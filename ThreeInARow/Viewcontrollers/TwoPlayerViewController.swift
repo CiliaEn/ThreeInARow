@@ -31,6 +31,9 @@ class TwoPlayerViewController: UIViewController {
             player2Name = p2Name
         }
     }
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
