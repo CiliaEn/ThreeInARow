@@ -205,7 +205,6 @@ class GameViewController: UIViewController {
                 firstTurn = Turn.p2
                 setTurn(p2, Turn.p2)
             }
-            setTurn(p1, Turn.p1)
         } else{
             firstTurn = Turn.p1
             setTurn(p1, Turn.p1)
