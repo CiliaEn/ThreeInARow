@@ -19,6 +19,7 @@ class GameViewController: UIViewController {
     var currentTurn = Turn.p1
     var game = Game()
     var onePlayerMode : Bool?
+    var onePlayer = false
     var gameMode : String?
     var mode = ""
     var listOfButtons = [UIButton]()
@@ -62,6 +63,9 @@ class GameViewController: UIViewController {
         
         if let gameMode = gameMode {
             mode = gameMode
+        }
+        if let oneP = onePlayerMode {
+            onePlayer = oneP
         }
         addButtonTags()
         addButtonsToList()
@@ -107,7 +111,7 @@ class GameViewController: UIViewController {
                 checkIfGameIsOver()
                 
                 //makes move for the computer if it's oneplayer-mode
-                if onePlayerMode != nil {
+                if onePlayer {
                     if (game.isOver == false){
                         makeMoveForPC()
                         setTurn(p1, Turn.p1)
@@ -169,12 +173,14 @@ class GameViewController: UIViewController {
             resetBoard()
             turnLabel.isUserInteractionEnabled = false
             setFirstTurn()
+            print("R")
         }
     }
     
     func setTurn(_ player : Player, _ turn : Turn){
         currentTurn = turn
         turnLabel.text = "\(player.name) make your move!"
+        print("E")
     }
     
     func checkIfGameIsOver() {
@@ -201,9 +207,13 @@ class GameViewController: UIViewController {
     func setFirstTurn() {
         
         if (firstTurn == Turn.p1){
-            if onePlayerMode == nil{
+            print("q")
+            if onePlayer == false {
+                print("w")
                 firstTurn = Turn.p2
                 setTurn(p2, Turn.p2)
+            }else{
+                setTurn(p1, Turn.p1)
             }
         } else{
             firstTurn = Turn.p1
